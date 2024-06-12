@@ -1,5 +1,21 @@
 # React + TypeScript + Vite
 
+Install Run on Save extension and add this setting to (ctrl+shift+p) -> setting.json on VSCODE
+It will execute: ->  prettier \"src/**/*.{js,jsx,ts,tsx,css,scss}\" --write && eslint src --ext .js,.jsx,.ts,.tsx --fix with
+
+{
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": ".*\\.(js|jsx|ts|tsx|css|scss)$",
+        "cmd": "npm run format+lint"
+      }
+    ]
+  }
+}
+
+- [---]
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
