@@ -8,10 +8,12 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
+
 import { type Question as QuestionType } from './types'
 import { useQuestionsStore } from './store/Questions'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { gradientDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import Footer from './Footer'
 
 // esta funcion getBackgroundColor, al estar fuera del componente, solo se renderiza una vez, si estuviese dentro, se rendereizaría cuando el componente le toque
 const getBackgroundColor = (info: QuestionType, index: number) => {
@@ -67,12 +69,32 @@ const Question = ({ info }: { info: QuestionType }) => {
 export const Game = () => {
   const questions = useQuestionsStore((state) => state.questions)
   const currentQuestion = useQuestionsStore((state) => state.currentQuestion)
+  const nextQuestion = useQuestionsStore((state) => state.nextQuestion)
+  const prevQuestion = useQuestionsStore((state) => state.prevQuestion)
 
   const questionInfo = questions[currentQuestion]
 
   return (
     <>
+      <Stack
+        direction='row'
+        gap='2'
+        alignItems='center'
+        justifyContent='center'
+      >
+        <IconButton onClick={prevQuestion} disabled={currentQuestion === 0}>
+          Prev
+        </IconButton>
+        {currentQuestion + 1} / {questions.length}
+        <IconButton
+          onClick={nextQuestion}
+          disabled={currentQuestion >= questions.length - 1}
+        >
+          Next
+        </IconButton>
+      </Stack>
       <Question info={questionInfo} />
+      <Footer />
     </>
   )
 }

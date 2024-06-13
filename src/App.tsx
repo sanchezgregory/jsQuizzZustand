@@ -7,7 +7,6 @@ import { Game } from './Game.tsx'
 
 function App() {
   const questions = useQuestionsStore((state) => state.questions)
-  console.log(questions)
 
   return (
     <main>
